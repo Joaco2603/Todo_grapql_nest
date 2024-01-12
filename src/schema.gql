@@ -2,8 +2,42 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Todo {
+  uuid: Int!
+  description: String!
+  done: Boolean!
+}
+
+type AggregationsType {
+  total: Int!
+  pending: Int!
+  completed: Int!
+}
+
 type Query {
   Hola: String!
   numberRandom: Float!
   randomFromZeroToTen(to: Int): Int!
+  Todo(status: Boolean): [Todo!]!
+  SearchTodo(id: Int!): Todo!
+  TotalTodos: Int!
+  pendingTodos: Int!
+  completedTodos: Int!
+  aggregations: AggregationsType!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  removeTodo(id: Int!): Boolean!
+}
+
+input CreateTodoInput {
+  description: String!
+}
+
+input UpdateTodoInput {
+  id: Int!
+  description: String
+  done: Boolean
 }
